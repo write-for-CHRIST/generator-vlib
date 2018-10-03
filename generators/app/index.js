@@ -25,6 +25,21 @@ module.exports = class extends Generator {
         type: 'input',
         name: 'githubUsername',
         message: 'Enter githubUsername'
+      },
+      {
+        type: 'input',
+        name: 'repoName',
+        message: 'Enter repo name'
+      },
+      {
+        type: 'input',
+        name: 'name',
+        message: 'Enter your NPM username'
+      },
+      {
+        type: 'input',
+        name: 'email',
+        message: 'Enter your NPM email'
       }
     ];
 
