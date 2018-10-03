@@ -6,16 +6,25 @@ const yosay = require('yosay');
 module.exports = class extends Generator {
   prompting() {
     // Have Yeoman greet the user.
-    this.log(
-      yosay(`Welcome to the impeccable ${chalk.red('generator-vlib')} generator!`)
-    );
+    this.log(yosay(`Welcome to the ${chalk.red('vlib')} generator!`));
 
     const prompts = [
       {
-        type: 'confirm',
-        name: 'someAnswer',
-        message: 'Would you like to enable this option?',
-        default: true
+        type: 'input',
+        name: 'pkg',
+        message: 'Enter the package name',
+        default: this.appname
+      },
+      {
+        type: 'input',
+        name: 'description',
+        message: 'Enter package description',
+        default: 'Yet another package'
+      },
+      {
+        type: 'input',
+        name: 'githubUsername',
+        message: 'Enter githubUsername'
       }
     ];
 
@@ -26,13 +35,21 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    this.fs.copy(
-      this.templatePath('dummyfile.txt'),
-      this.destinationPath('dummyfile.txt')
+    this.fs.copyTpl(
+      this.templatePath('package.json'),
+      this.destinationPath('package.json'),
+      {...this.props}
     );
   }
 
+  git() {
+    this.spawnCommandSync('git', ['init']);
+  }
+
   install() {
-    this.installDependencies();
+    this.installDependencies({
+      yarn: {force: true},
+      npm: false
+    });
   }
 };
