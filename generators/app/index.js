@@ -4,42 +4,48 @@ const chalk = require('chalk');
 const yosay = require('yosay');
 
 module.exports = class extends Generator {
-  prompting() {
+  async prompting() {
     // Have Yeoman greet the user.
     this.log(yosay(`Welcome to the ${chalk.red('vlib')} generator!`));
+
+    const config = this.config.getAll();
 
     const prompts = [
       {
         type: 'input',
         name: 'pkg',
         message: 'Enter the package name',
-        default: this.appname
+        default: config.pkg || this.appname
       },
       {
         type: 'input',
         name: 'description',
         message: 'Enter package description',
-        default: 'Yet another package'
+        default: config.description || 'Yet another package'
       },
       {
         type: 'input',
         name: 'githubUsername',
-        message: 'Enter githubUsername'
+        message: 'Enter githubUsername',
+        default: config.githubUsername || (await this.user.github.username())
       },
       {
         type: 'input',
         name: 'repoName',
-        message: 'Enter repo name'
+        message: 'Enter repo name',
+        default: config.repoName || this.appname
       },
       {
         type: 'input',
         name: 'name',
-        message: 'Enter your NPM username'
+        message: 'Enter your NPM username',
+        default: config.name || this.user.git.name()
       },
       {
         type: 'input',
         name: 'email',
-        message: 'Enter your NPM email'
+        message: 'Enter your NPM email',
+        default: config.email || this.user.git.email()
       }
     ];
 
@@ -50,21 +56,86 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    this.fs.copyTpl(
-      this.templatePath('package.json'),
-      this.destinationPath('package.json'),
-      {...this.props}
-    );
+    const mv = (from, to) => {
+      this.fs.move(this.destinationPath(from), this.destinationPath(to));
+    };
+
+    this.fs.copyTpl([`${this.templatePath()}/**`], this.destinationPath(), {
+      ...this.props
+    });
+
+    mv('index.ts', 'src/index.ts');
+    mv('index.test.ts', 'src/__tests__/index.test.ts');
+    const DOT_FILES = [
+      'babelrc',
+      'commitlint.config.js',
+      'eslintrc.json',
+      'gitignore',
+      'huskyrc.json',
+      'lintstagedrc.json',
+      'prettierrc.json',
+      'travis.yml'
+    ];
+    let i = DOT_FILES.length;
+    while (i--) {
+      mv(DOT_FILES[i], `.${DOT_FILES[i]}`);
+    }
   }
 
   git() {
+    const gitRemote = `https://github.com/${this.props.githubUsername}/${
+      this.props.repoName
+    }`;
     this.spawnCommandSync('git', ['init']);
+    this.spawnCommandSync('git', ['remote', 'add', 'origin', gitRemote]);
+    this.log(`Initialized git reposity with origin at: ${gitRemote}`);
+  }
+
+  save() {
+    for (let prop in this.props) {
+      if (this.props[prop]) {
+        this.config.set(prop, this.props[prop]);
+      }
+    }
+    this.config.save();
+    this.log('Saved package configuration!');
   }
 
   install() {
-    this.installDependencies({
-      yarn: {force: true},
-      npm: false
+    const devDeps = [
+      '@commitlint/cli',
+      '@commitlint/config-conventional',
+      '@types/jest',
+      '@types/node',
+      '@types/rimraf',
+      'commitizen',
+      'coveralls',
+      'cross-env',
+      'jest',
+      'lint-staged',
+      'nodemon',
+      'npm-run-all',
+      'parcel-bundler',
+      'parcel-plugin-typescript',
+      'prettier',
+      'rimraf',
+      'semantic-release',
+      'ts-jest',
+      'ts-node',
+      'tslint',
+      'tslint-config-airbnb',
+      'tslint-config-prettier',
+      'typedoc',
+      'typescript'
+    ];
+    const devDepsES = [
+      'babel-core',
+      'babel-plugin-transform-es2015-modules-commonjs',
+      'babel-plugin-transform-object-rest-spread',
+      'babel-preset-env'
+    ];
+    this.yarnInstall([devDeps, ...devDepsES], {
+      'save-dev': true
     });
   }
 };
