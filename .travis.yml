@@ -15,11 +15,11 @@ node_js:
   - node
 
 before_script:
-  - yarn
+  - npm install
 
 script:
-  - yarn test
+  - npm run test
 
 after_script:
   - cat ./coverage/lcov.info | coveralls
-  - yarn semantic-release
+  - npm run semantic-release
