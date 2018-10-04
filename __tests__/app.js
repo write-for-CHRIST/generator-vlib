@@ -1,6 +1,6 @@
 'use strict';
 const path = require('path');
-// Const assert = require('yeoman-assert');
+const assert = require('yeoman-assert');
 const helpers = require('yeoman-test');
 
 describe('generator-vlib:app', () => {
@@ -11,7 +11,6 @@ describe('generator-vlib:app', () => {
   });
 
   it('creates files', () => {
-    // Assert.file(['package.json', 'README.md', 'LICENSE']);
-    expect(true).toEqual(true);
+    assert.file(['package.json', 'README.md', 'LICENSE']);
   });
 });
