@@ -66,6 +66,8 @@ module.exports = class extends Generator {
 
     mv('index.ts', 'src/index.ts');
     mv('index.test.ts', 'src/__tests__/index.test.ts');
+    mv('gh-pages-publish.ts', 'tools/gh-pages-publish.ts');
+
     const DOT_FILES = [
       'babelrc',
       'commitlint.config.js',
@@ -102,40 +104,10 @@ module.exports = class extends Generator {
   }
 
   install() {
-    const devDeps = [
-      '@commitlint/cli',
-      '@commitlint/config-conventional',
-      '@types/jest',
-      '@types/node',
-      '@types/rimraf',
-      'commitizen',
-      'coveralls',
-      'cross-env',
-      'jest',
-      'lint-staged',
-      'nodemon',
-      'npm-run-all',
-      'parcel-bundler',
-      'parcel-plugin-typescript',
-      'prettier',
-      'rimraf',
-      'semantic-release',
-      'ts-jest',
-      'ts-node',
-      'tslint',
-      'tslint-config-airbnb',
-      'tslint-config-prettier',
-      'typedoc',
-      'typescript'
-    ];
-    const devDepsES = [
-      'babel-core',
-      'babel-plugin-transform-es2015-modules-commonjs',
-      'babel-plugin-transform-object-rest-spread',
-      'babel-preset-env'
-    ];
-    this.yarnInstall([devDeps, ...devDepsES], {
-      'save-dev': true
+    this.installDependencies({
+      yarn: true,
+      npm: false,
+      bower: false
     });
   }
 };
