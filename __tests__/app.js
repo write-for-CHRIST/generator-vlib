@@ -7,10 +7,10 @@ describe('generator-vlib:app', () => {
   beforeAll(() => {
     return helpers
       .run(path.join(__dirname, '../generators/app'))
-      .withPrompts({ someAnswer: true });
+      .withPrompts({pkg: 'a-library'});
   });
 
   it('creates files', () => {
-    assert.file(['dummyfile.txt']);
+    assert.file(['package.json', 'README.md', 'LICENSE']);
   });
 });
