@@ -1,9 +1,21 @@
-language: node_js
+branches:
+  only:
+    - master
+    - /^greenkeeper/.*$/
 
-email: false
+cache:
+  yarn: true
+  directories:
+    - node_modules
+
+notifications:
+  email: false
+
+node_js:
+  - node
 
 script:
-  - yarn test
+  - npm run test:prod && npm run build
 
 after_script:
   - cat ./coverage/lcov.info | coveralls
