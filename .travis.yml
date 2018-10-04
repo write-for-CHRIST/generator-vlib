@@ -14,6 +14,9 @@ notifications:
 node_js:
   - node
 
+before_script:
+  - yarn
+
 script:
   - yarn test
 
