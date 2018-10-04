@@ -5,8 +5,7 @@
   "homepage": "https://github.com/write-for-CHRIST/generator-vlib",
   "author": {
     "name": "nampdn",
-    "email": "nampdn@protonmail.com",
-    "url": ""
+    "email": "nampdn@protonmail.com"
   },
   "files": [
     "generators"
