@@ -31,13 +31,13 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:prod": "npm run lint && npm run test -- --coverage --no-cache",
+    "docs:clean": "rimraf docs",
     "docs:create": "typedoc --out './docs' --readme './README.md' --module 'commonjs'",
     "docs:deploy": "ts-node ./tools/gh-pages-publish",
+    "docs:update": "run-s docs:clean docs:create docs:deploy",
     "report-coverage": "cat ./coverage/lcov.info | coveralls",
     "semantic-release": "semantic-release",
-    "precommit": "lint-staged",
-    "exe": "node build/index.js",
-    "dev": "run-s build exe"
+    "precommit": "lint-staged"
   },
   "dependencies": {},
   "devDependencies": {
