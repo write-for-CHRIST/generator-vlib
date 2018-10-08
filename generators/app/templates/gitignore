@@ -8,6 +8,8 @@
 coverage/
 build/
 dist/
+docs/
+tools/
 
 # User-specific files
 *.suo
