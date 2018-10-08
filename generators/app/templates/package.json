@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "typings": "build/index.d.ts",
   "module": "build/index.js",
-  "repository": "<%= githubUsername %>/<%= repoName %>",
+  "repository": "https://github.com/<%= githubUsername %>/<%= repoName %>.git",
   "license": "MIT",
   "author": {
     "name": "<%= name %>",
