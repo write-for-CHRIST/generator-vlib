@@ -14,7 +14,7 @@ describe('generator-vlib:app', () => {
   //   assert.file(['package.json', 'README.md', 'LICENSE']);
   // });
 
-  it('connect ipfs', () => {
+  it('true', () => {
     expect(true).toEqual(true);
   });
 });

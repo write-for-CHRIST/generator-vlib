@@ -3,6 +3,7 @@ cache:
     - node_modules/
 
 before_script:
+  - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
   - yarn
 
 build:

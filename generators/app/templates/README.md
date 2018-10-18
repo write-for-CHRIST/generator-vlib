@@ -1,10 +1,10 @@
 # <%= pkg %>
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/<%= githubUsername %>/<%= repoName %>.svg)](https://greenkeeper.io/)
-[![Build Status](https://travis-ci.org/<%= githubUsername %>/<%= repoName %>.svg?branch=master)](https://travis-ci.org/<%= githubUsername %>/<%= repoName %>) 
-[![Coverage Status](https://coveralls.io/repos/github/<%= githubUsername %>/<%= repoName %>/badge.svg)](https://coveralls.io/github/<%= githubUsername %>/<%= repoName %>)
-![David](https://img.shields.io/david/<%= githubUsername %>/<%= repoName %>.svg)
-![David](https://img.shields.io/david/dev/<%= githubUsername %>/<%= repoName %>.svg)
+[![Greenkeeper badge](https://badges.greenkeeper.io/<%= gitUsername %>/<%= repoName %>.svg)](https://greenkeeper.io/)
+[![Build Status](https://travis-ci.org/<%= gitUsername %>/<%= repoName %>.svg?branch=master)](https://travis-ci.org/<%= gitUsername %>/<%= repoName %>) 
+[![Coverage Status](https://coveralls.io/repos/github/<%= gitUsername %>/<%= repoName %>/badge.svg)](https://coveralls.io/github/<%= gitUsername %>/<%= repoName %>)
+![David](https://img.shields.io/david/<%= gitUsername %>/<%= repoName %>.svg)
+![David](https://img.shields.io/david/dev/<%= gitUsername %>/<%= repoName %>.svg)
 
 <%= description %>
 
