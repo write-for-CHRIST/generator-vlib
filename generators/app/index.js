@@ -21,7 +21,7 @@ module.exports = class extends Generator {
         type: 'input',
         name: 'description',
         message: 'Enter package description',
-        default: config.description || 'Yet another package'
+        default: config.description || 'Yet another package!'
       },
       {
         type: 'input',
