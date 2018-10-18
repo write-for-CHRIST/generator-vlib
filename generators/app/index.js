@@ -71,11 +71,16 @@ module.exports = class extends Generator {
     const DOT_FILES = [
       'babelrc',
       'commitlint.config.js',
+      'editorconfig',
+      'eslintignore',
       'eslintrc.json',
+      'gitattributes',
       'gitignore',
+      'gitlab-ci.yml',
       'huskyrc.json',
       'lintstagedrc.json',
       'prettierrc.json',
+      'releaserc.json',
       'travis.yml'
     ];
     let i = DOT_FILES.length;

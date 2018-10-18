@@ -1,0 +1,35 @@
+cache:
+  paths:
+    - node_modules/
+
+before_script:
+  - yarn
+
+build:
+  stage: build
+  tags:
+    - macos
+  script:
+    - npm run build
+  only:
+    - master
+
+test:
+  stage: test
+  tags:
+    - macos
+  script:
+    - npm run test
+  only:
+    - master
+
+deploy:
+  stage: deploy
+  tags:
+    - macos
+  script:
+    - npm run test:prod && npm run build
+    # - yarn report-coverage
+    - yarn semantic-release
+  only:
+    - master
