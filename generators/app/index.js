@@ -25,9 +25,15 @@ module.exports = class extends Generator {
       },
       {
         type: 'input',
-        name: 'githubUsername',
-        message: 'Enter githubUsername',
-        default: config.githubUsername || (await this.user.github.username())
+        name: 'git',
+        message: 'Enter github or gitlab',
+        default: config.git || 'github'
+      },
+      {
+        type: 'input',
+        name: 'gitUsername',
+        message: 'Enter git username or group',
+        default: config.gitUsername || (await this.user.github.username())
       },
       {
         type: 'input',
@@ -90,7 +96,7 @@ module.exports = class extends Generator {
   }
 
   git() {
-    const gitRemote = `https://github.com/${this.props.githubUsername}/${
+    const gitRemote = `https://${this.props.git}.com/${this.props.gitUsername}/${
       this.props.repoName
     }`;
     this.spawnCommandSync('git', ['init']);
