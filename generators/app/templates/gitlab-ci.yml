@@ -4,7 +4,7 @@ cache:
 
 before_script:
   - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
-  - yarn
+  - pwd && yarn --verbose
 
 build:
   stage: build
